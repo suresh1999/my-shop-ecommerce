@@ -1,0 +1,53 @@
+<%- include('../_layouts/adminheader.ejs') %>
+
+<h2 class="page-title">Products</h2>
+<a href="/admin/products/add-product" class="btn btn-primary">Add Product</a>
+<br><br>
+<% if(count>0) { %>
+<table class="table table-striped sorting alignmiddle">
+    <thead>
+        <tr class="home">
+            <th>Prodcut</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Product Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    <% products.forEach(function(product){ %>
+        <tr >
+            <td><%= product.title %></td>
+            <td><%= parseFloat(product.price).toFixed(2) %></td>
+            <td><%= product.category %></td>
+            <td>
+                <% if (product.image == "") {%>
+                <img id="noimage" src="/images/noimage.png" alt="">   
+                <% } else { %>
+                <img id="noimage" src="/product_images/<%= product.id %>/<%= product.image %>" alt="">
+                <% } %>
+            </td>
+            <td><a href="/admin/products/edit-product/<%= product.id %>/">Edit Product</a></td>
+            <td><a href="/admin/products/delete-product/<%= product._id %>/">Delete Product</a></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+<% } else { %>
+<h3 class="text-center">There are no products</h3>
+<% } %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $('tbody').sortable({
+        items : "tr:not('.home')",
+        placeholder : 'ui-state-highlight',
+        update : function(){
+            var ids = $('tbody').sortable('serialize');
+            var urls = '/admin/pages/reorder-pages';
+            $.post(urls, ids);
+        }
+    });
+</script>
+<%- include('../_layouts/adminfooter.ejs') %>

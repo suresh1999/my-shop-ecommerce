@@ -1,0 +1,40 @@
+<%- include('../_layouts/adminheader.ejs') %>
+
+<h2 class="page-title">Category</h2>
+<a href="/admin/categories/add-category" class="btn btn-primary">Add a Category</a>
+<br><br>
+
+<table class="table table-striped sorting">
+    <thead>
+        <tr class="home">
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% categories.forEach(function(cat){ %>
+        <tr id="id_<%= cat._id %>" class="<%= cat._slug %>">
+            <td><%= cat.title %></td>
+            <td><a href="/admin/categories/edit-category/<%= cat._id %>/">Edit Category</a></td>
+            <% if (cat.slug=="home") { %>
+                <td></td>
+            <% } else { %>
+            <td><a href="/admin/categories/delete-category/<%= cat._id %>/">Delete Category</a></td>
+            <% } %>
+        </tr>
+    <% }) %>
+    </tbody>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $('tbody').sortable({
+        items : "tr:not('.home')",
+        placeholder : 'ui-state-highlight',
+        update : function(){
+            var ids = $('tbody').sortable('serialize');
+            var urls = '/admin/categories/reorder-category';
+            $.post(urls, ids);
+        }
+    });
+</script>
+<%- include('../_layouts/adminfooter.ejs') %>
