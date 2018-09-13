@@ -42,13 +42,15 @@
             <li><a href="/admin/categories">Categories</a></li>
             <li><a href="/admin/products">Products</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/logout" > Hi , <%= user.username %> (logout)</a></li>
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-        <br><br><br>
-
+        
         <%- messages('messages', locals) %>
         
         <% if (errors) {%>

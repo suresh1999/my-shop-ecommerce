@@ -30,6 +30,7 @@ router.post('/register', function(req, res){
     if(errors){
         res.render('register', {
             title: 'Register',
+            user:null,
             errors:errors
         })
     }else{
@@ -68,5 +69,27 @@ router.post('/register', function(req, res){
 
 });
 
+router.get('/login', function(req, res){
+    if(res.locals.user) res.redirect('/')
 
+    res.render('login', {
+        title : 'login'
+    })
+})
+router.post('/login', function(req, res, next){
+    
+    if(res.locals.user) res.redirect('/')
+
+    passport.authenticate('local',{
+        successRedirect : '/',
+        failureRedirect : '/users/login',
+        failureFlash : true
+    })(req,res,next);
+})
+router.get('/logout', function(req, res){
+    req.logout();
+    req.flash('success', 'you are logged out');
+    res.redirect('/users/login');
+
+})
 module.exports = router;
