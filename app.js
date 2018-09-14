@@ -112,7 +112,7 @@ app.use('/users', users);
 
 app.use('/', index);
 const port = 5000;
-app.set('port', process.env.PORT || 5000)
+app.set('port', process.env.PORT || 8080)
 app.listen(port, function(){
     console.log(`successfully started server on port ${port}`);
 });
