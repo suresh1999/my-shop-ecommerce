@@ -4,7 +4,8 @@
   "description": "Simple Ecommerce Website",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node app.js"
   },
   "author": "suresh1999",
   "license": "ISC",
