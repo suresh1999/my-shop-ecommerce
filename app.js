@@ -8,7 +8,7 @@ var expressValidator = require('express-validator');
 var fileUpload = require('express-fileupload');
 var passport = require('passport');
 // database configuration
-mongoose.connect(config.database);
+mongoose.connect('mongodb://suresh1999:tester123@ds257372.mlab.com:57372/ecommerce');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {
