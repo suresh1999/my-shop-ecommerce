@@ -3,7 +3,7 @@ exports.isUser = function(req, res, next){
         next();
     else{
         req.flash('danger', 'you must be logged in');
-        req.redirect('/users/login');
+        res.redirect('/users/login');
     }
 }
 
@@ -12,6 +12,6 @@ exports.isAdmin = function(req, res, next){
         next();
     else{
         req.flash('danger', 'please login as admin');
-        req.redirect('/users/login');
+        res.redirect('/users/login');
     }
 }

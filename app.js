@@ -15,7 +15,7 @@ db.once('open', function () {
     console.log('connected to mongoDB');
 })
 var app = express();
-
+var auth = require('./config/auth')
 
 app.locals.errors = null;
 
@@ -104,7 +104,7 @@ const cart = require('./routes/cart');
 const users = require('./routes/user');
 
 app.use('/admin/pages', adminPages);
-app.use('/admin/categories', adminCategories);
+app.use('/admin/categories',adminCategories);
 app.use('/admin/products', adminProducts);
 app.use('/products', products);
 app.use('/cart', cart);
