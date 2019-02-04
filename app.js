@@ -7,8 +7,12 @@ var session = require('express-session');
 var expressValidator = require('express-validator');
 var fileUpload = require('express-fileupload');
 var passport = require('passport');
+var process = require('process')
 // database configuration
-mongoose.connect('mongodb://suresh1999:tester123@ds257372.mlab.com:57372/ecommerce');
+if(process.env.NODE_ENV === 'production')
+    mongoose.connect(process.env.database);
+else
+    mongoose.connect('mongodb://localhost/ecommerce-node')
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {
